@@ -115,7 +115,7 @@ get-cur-envname() {
 
 # parameters: none
 set-constants() {
-	export GIT_URL=ssh://jairsonrodrigues@gmail.com@source.developers.google.com:2022/p/projetosd-342602/r/projetosd
+	export GIT_URL=ssh://gabmenezes17@gmail.com@source.developers.google.com:2022/p/projetosd-342602/r/projetosd
 }
 
 

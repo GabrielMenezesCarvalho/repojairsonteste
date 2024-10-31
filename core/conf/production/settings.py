@@ -19,8 +19,8 @@ SECRET_KEY = "hLwoS-HbZx4eNUTqrM3osPFdHQamfLcYo38iugUCX4d"
 DEBUG = 0
 
 # load production server from .env
-ALLOWED_HOSTS        = ['projetosd.com.br']
-CSRF_TRUSTED_ORIGINS = ['projetosd.com.br']
+ALLOWED_HOSTS        = ['reservaafacil.shop','www.reservaafacil.shop']
+CSRF_TRUSTED_ORIGINS = ['reservaafacil.shop','www.reservaafacil.shop']
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
 
