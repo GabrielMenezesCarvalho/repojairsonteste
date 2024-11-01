@@ -1,23 +1,60 @@
-import datetime
-
 from django.db import models
-from django.utils import timezone
 
-class Pergunta(models.Model):
-    texto_da_pergunta = models.CharField(max_length=200)
-    data_pub = models.DateTimeField('Data da Publicação')
+class Horarios(models.Model):
+    horarioDeAbertura = models.TimeField()
+    horarioDeFechamento = models.TimeField()
 
-    def __str__(self):
-        return self.texto_da_pergunta
-
-    def recente(self):
-        return self.data_pub >= timezone.now() - datetime.timedelta(days=1)
-
-
-class Resposta(models.Model):
-    pergunta = models.ForeignKey(Pergunta, on_delete=models.CASCADE)
-    texto_da_resposta = models.CharField(max_length=200)
-    votos = models.IntegerField(default=0)
+    class Meta:
+        verbose_name = 'Horario'
+        verbose_name_plural = 'Horarios'
 
     def __str__(self):
-        return self.texto_da_resposta
+        return f"Horario de Abertura {self.horarioDeAbertura} {self.horarioDeFechamento}"
+
+class Usuarios(models.Model):
+    nome = models.CharField(max_length=100)
+    email = models.EmailField()
+    senha = models.CharField(max_length=100)
+    telefone = models.CharField(max_length=15, null=True)
+    class Meta:
+        verbose_name = 'Usuário'
+        verbose_name_plural = 'Usuários'
+
+    def __str__(self):
+        #senha tem que ver o jeito seguro de armazenar, XD
+        return f"Usuário {self.nome } {self.email}  {self.telefone}" 
+  
+
+class Restaurantes(models.Model):
+    nome = models.CharField(max_length=100)
+    endereco = models.CharField(max_length=100)
+    capacidadeDeMesas = models.PositiveIntegerField(null=True)
+
+    class Meta:
+        verbose_name = 'Restaurante'
+        verbose_name_plural = 'Restaurantes'
+
+    def __str__(self):
+        return f"Restaurante {self.nome} {self.endereco} {self.capacidadeDeMesas}"
+    
+class Mesa(models.Model):
+    restaurante = models.ForeignKey(Restaurantes, on_delete=models.CASCADE)
+    numeroDaMesa = models.CharField(max_length=100)
+    capacidadeDaMesa = models.PositiveIntegerField(null=True)
+
+    def __str__(self):
+        return f"Mesa {self.numeroDaMesa} {self.capacidadeDaMesa}"
+
+class Reserva(models.Model):
+    mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, null=True)
+    usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, null=True)
+    restaurante = models.ForeignKey(Restaurantes, on_delete=models.CASCADE, null=True)
+
+    dataDaReserva = models.DateField()
+    horaDaReserva = models.TimeField()
+    numero_de_pessoas = models.PositiveIntegerField(null=True)
+
+    def __str__(self):
+        return f"Reserva para {self.usuario} em {self.dataDaReserva} às {self.horaDaReserva}"
+
+
