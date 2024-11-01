@@ -1,3 +1,7 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
-# Create your views here.
+def home(request):
+    return HttpResponse("Bem-vindo à página inicial!")
+
+# Adicione outras funções de visualização conforme necessário
