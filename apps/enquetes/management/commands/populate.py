@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "seu_projeto.settings")
 django.setup()
 
-from seu_app.models import Horarios, Usuarios, Restaurantes, Mesa, Reserva
+from enquetes.models import Horarios, Usuarios, Restaurantes, Mesa, Reserva
 
 fake = Faker("pt_BR")
 
